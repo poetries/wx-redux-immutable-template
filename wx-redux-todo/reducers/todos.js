@@ -21,7 +21,8 @@ const todo = (state = [], action) => {
 
 export default (state = [], action) => {
   if (action.type === ActionTypes.ADD_TODO){
-    return state.push(todo(undefined, action))
+    state.push(todo(undefined, action))
+    return state
   } else if (action.type === ActionTypes.TOGGLE_TODO){
     return state.map(t => todo(t, action))
   }
