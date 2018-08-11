@@ -6,7 +6,7 @@
 - 导入`wx-redux-immutable-template`到微信开发者工具
 - 在`wx-redux-immutable-template`下`middleware/api.js`搜索`@todo`修改对应地址信息
 
-> actions的写法示例
+> wx-redux-imutable-template模板的 actions的写法示例
 
 ```javascript
 import { CALL_API } from '../middleware/api'
@@ -21,10 +21,10 @@ export const fetchCustomers = () => (dispatch, getState) => {
   return dispatch({
     [CALL_API]: {
       types: [FETCH_CUSTOMER_REQUEST, FETCH_CUSTOMER_SUCCESS, FETCH_CUSTOMER_FAILURE],
-      endpoint: `/v1/customers`,
-      schema: 'customers',
-      query:{
-        method:'get',
+      endpoint: `/v1/customers`, // 请求的地址
+      schema: 'customers', // 返回的数据挂载到该节点下 取得时候 const {customer} = action.response
+      query:{ // 查询的参数
+        method:'get', // 不传 默认get 
         data:{
             // 这里写请求的参数 如
             customerId,
@@ -70,6 +70,48 @@ export default (state = fromJS({
 
   return state
 }
+```
+
+> Page页面中引用
+
+```javascript
+import { connect } from '../../public/libs/wx-redux'
+import { fetchCustomers } from '../../actions/index'
+
+// 页面配置信息
+const pageConfig = {
+  data: {
+    customers:[]
+  },
+  handleClick(){
+    setTimeout(()=>{
+      console.log(this.data.customers.toJS())
+    },1000)
+    
+    this.fetchCustomers()
+  },
+  onReady(){
+    // 所有state、action都在data上
+    // console.log(this);
+  }
+}
+
+// 传入state
+const mapStateToData = state =>{
+  return {
+    customers: state.getIn(['customers','data']) //直接传入遍历即可，不需要toJS()
+  }
+}
+
+const nextPageConfig = connect(
+  mapStateToData,
+  // 传入action
+  {
+    fetchCustomers
+  }
+)(pageConfig)
+
+Page(nextPageConfig);
 ```
 
 
