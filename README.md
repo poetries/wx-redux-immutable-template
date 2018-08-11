@@ -14,7 +14,9 @@ remotedev --hostname=localhost --port=5678
 
 > 浏览器中访问`localhost:5678`
 
-![remote-redux-devtools](https://upload-images.jianshu.io/upload_images/1480597-54032e17cab3dc21.png?imageMogr2/auto-orient/strip%7CimageView2/2/w/1240)
+![remote-redux-devtools](https://upload-images.jianshu.io/upload_images/1480597-ed70e8002abbc695.png?imageMogr2/auto-orient/strip%7CimageView2/2/w/1240)
+
+![wx-redux-todos](https://upload-images.jianshu.io/upload_images/1480597-80a09d7ad762585a.png?imageMogr2/auto-orient/strip%7CimageView2/2/w/1240)
 
 - 如果不能访问，可以尝试使用`http://remotedev.io/local/`，打开后点击下面的`setting`，设置使用本地的`server`
 
