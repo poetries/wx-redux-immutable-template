@@ -6,6 +6,61 @@
 - 导入`wx-redux-template`到微信开发者工具
 - 在`wx-redux-template`下`middleware/api.js`搜索`@todo`修改对应地址信息
 
+> actions的写法示例
+
+```javascript
+import { CALL_API } from '../middleware/api'
+
+export const FETCH_CUSTOMER_REQUEST = 'FETCH_CUSTOMER_REQUEST'
+export const FETCH_CUSTOMER_SUCCESS = 'FETCH_CUSTOMER_SUCCESS'
+export const FETCH_CUSTOMER_FAILURE = 'FETCH_CUSTOMER_FAILURE'
+
+// thunk写法，对应的中间件处理在middleware/api.js中
+export const fetchCustomers = () => (dispatch, getState) => {
+
+  return dispatch({
+    [CALL_API]: {
+      types: [FETCH_CUSTOMER_REQUEST, FETCH_CUSTOMER_SUCCESS, FETCH_CUSTOMER_FAILURE],
+      endpoint: `/v1/customers`,
+      schema: 'customers',
+      query:{
+        method:'get',
+        data:{
+            // 这里写请求的参数 如
+            customerId,
+            filterStateus:5
+        }
+      }
+    }
+  })
+}
+```
+
+> 对应reducer写法
+
+```javascript
+import * as ActionTypes from '../actions/index'
+
+export default (state = {
+  fetching: false,
+  error: false,
+  data: []
+}, action) => {
+
+  if (action.type === ActionTypes.FETCH_CUSTOMER_SUCCESS){
+    const customers = action.response.list
+    
+    console.log(customers,'customers===')
+    return Object.assign({}, { ...state,data: customers})
+  } else if (action.type === ActionTypes.FETCH_CUSTOMER_REQUEST) {
+    return Object.assign({},{ ...state,fetching:true,data:[]})
+  } else if (action.type === ActionTypes.FETCH_CUSTOMER_FAILURE) {
+    return Object.assign({}, { ...state, error: true, data: [] })
+  }
+  return state
+}
+```
+
 ## 特性
 
 - 支持`redux-devtools`
