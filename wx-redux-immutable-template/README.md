@@ -1,12 +1,5 @@
-## wx-redux-immutable
 
-> 小程序集成`redux`、`immutable`模板封装
-
-
-## 模板
-
-- [集成redux](wx-redux-template/REMEAD.md)
-- [集成redux-immutable](wx-redux-immutable-template/REMEAD.md)
+## 微信小程序集成Redux-immutable-template
 
 
 ## 特性
@@ -25,8 +18,8 @@
 > 本地安装`remotedev-server`并启动
 
 ```shell
-npm install -g remotedev-server
-remotedev --hostname=localhost --port=5678
+   npm install -g remotedev-server
+   remotedev --hostname=localhost --port=5678
 ```
 
 > 浏览器中访问`localhost:5678`

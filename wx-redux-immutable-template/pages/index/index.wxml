@@ -1,0 +1,6 @@
+<view class="container">
+  <button bindtap='handleClick'>异步请求客户数据</button>
+  <view wx:for='{{customers}}'>
+    <text>{{item.date}}-{{item.customerName}}-{{item.productName}}</text>
+  </view>
+</view>
