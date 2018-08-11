@@ -12,6 +12,7 @@
 
 - 导入`wx-redux-template/wx-redux-immutable-template`到微信开发者工具
 - 在`wx-redux-template/wx-redux-immutable-template`下`middleware/api.js`搜索`@todo`修改对应地址信息
+- 根据业务处理登录拿到`token`等信息填充到`middleware/api.js`的`loginInfo`中
 
 > wx-redux-imutable-template模板的 actions的写法示例
 
