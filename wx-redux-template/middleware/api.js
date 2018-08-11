@@ -36,8 +36,8 @@ const callApi = (endpoint, schema, query = null) => {
   const baseURL = endpoint.match('auth/logout') ? API_ROOT.slice(0, -3) : API_ROOT;
   
   const config = {
-    url: `https://easy-mock.com/mock/5a535c5390626970a9649c4c/crm/v1/recharge-reports`,
-    // url: `${baseURL}${fullUrl}`,
+    url: `https://easy-mock.com/mock/5a535c5390626970a9649c4c/crm/v1/recharge-reports`,//@todo 测试地址 
+    // url: `${baseURL}${fullUrl}`, // 打开正式开发这行
       data,
       method,
       header: {
@@ -69,6 +69,7 @@ const callApi = (endpoint, schema, query = null) => {
 export const CALL_API = 'Call API'
 
 export default store => next => action => {
+    // //@todo 根据业务修改这里 拿到登录信息
     // const loginInfo = store.getState().get('loginInfo').toObject()
     const {loginInfo} = store.getState()
     const callAPI = action[CALL_API]
