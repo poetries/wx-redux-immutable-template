@@ -25,6 +25,9 @@ export const FETCH_CUSTOMER_FAILURE = 'FETCH_CUSTOMER_FAILURE'
 // thunk写法，对应的中间件处理在middleware/api.js中
 export const fetchCustomers = () => (dispatch, getState) => {
 
+ // 在getState中拿到所有的状态 如
+ // const loginInfo = const loginInfo = store.getState().get('loginInfo').toObject()
+ 
   return dispatch({
     [CALL_API]: {
       types: [FETCH_CUSTOMER_REQUEST, FETCH_CUSTOMER_SUCCESS, FETCH_CUSTOMER_FAILURE],
