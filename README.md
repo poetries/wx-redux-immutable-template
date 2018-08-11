@@ -5,8 +5,8 @@
 
 ## 模板
 
-- [集成redux](wx-redux-template/REMEAD.md)
-- [集成redux-immutable](wx-redux-immutable-template/REMEAD.md)
+- [集成redux](./wx-redux-template)
+- [集成redux-immutable](./wx-redux-immutable-template)
 
 
 ## 特性
