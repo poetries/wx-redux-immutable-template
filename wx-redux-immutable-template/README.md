@@ -1,6 +1,11 @@
 
 ## 微信小程序集成Redux-immutable-template
 
+## 使用方法
+
+- 导入`wx-redux-template/wx-redux-immutable-template`到微信开发者工具
+- 在`wx-redux-template/wx-redux-immutable-template`下`middleware/api.js`搜索`@todo`修改对应地址信息
+
 
 ## 特性
 
