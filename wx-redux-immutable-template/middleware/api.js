@@ -1,6 +1,6 @@
 import { normalize, schema } from '../public/libs/normalizr'
 import { camelizeKeys, decamelizeKeys } from '../public/libs/humps'
-import * as eCodeMsg from '../config/errorCode'
+import {default  as eCodeMsg} from '../config/errorCode'
 import {MSG_SHOW,MSG_INIT,COMMON_OVER} from '../actions/index'
 import   apiConfig from '../config/apiConfig'
 export const API_ROOT =  'http://'+apiConfig.apiDomain
@@ -12,6 +12,7 @@ const callApi = (endpoint, schema, query = null) => {
 
     if (method.toLowerCase() === 'get') {
         const q = decamelizeKeys(data||{})
+     
         if (q && q.query_optional) {
             Object.keys(q.query_optional).forEach(v => {
                 q.query_optional[v] = JSON.parse(q.query_optional[v])
@@ -33,38 +34,46 @@ const callApi = (endpoint, schema, query = null) => {
 }
 
   const config = {
-    url: `https://easy-mock.com/mock/5a535c5390626970a9649c4c/crm/v1/recharge-reports`,//@todo 测试地址 
-    // url: `${baseURL}${fullUrl}`, // 打开正式开发这行
-      data,
+      url: `${baseURL}${fullUrl}`, 
+      data:decamelizeKeys(data||{}),
       method,
       header: {
-        'content-type': 'application/json' // 默认值
+        'content-type': 'application/json' 
       }
   }
-
+  if(wx.getStorageSync("session_id")){
+     config.header.Cookie = `PHPSESSID=${wx.getStorageSync("session_id")}`
+  }
+  wx.showLoading({
+    title: '加载中',
+    mask: true
+  })
+  wx.showNavigationBarLoading()
   return wx.pro.request(config).then(res=>{
     
     if(res.statusCode === 204){
         return {}
     }
-    let  json = ''
-    if(res.statusCode === 200){
-         json = camelizeKeys(res.data)
-    }
+    const  json = camelizeKeys(res.data)
 
     if (json.code !== 0) {
-        return;
+        return Promise.reject({data:json})
+    }
+    if(res.statusCode === 200 && json.code==0){
+       return camelizeKeys(res.data.data)
     }
 
-    return camelizeKeys(json.data)
-    
-  }).catch(err=>{
-      // 这里组件修改一下 @todo
+  }).catch(error=>{
+
     wx.showToast({
-        title: err.errMsg,
+        title: error.errMsg,
         icon: 'loading',
         duration: 1000
       })
+      return Promise.reject(camelizeKeys(error)) 
+  }).finally(() => {
+    wx.hideNavigationBarLoading()
+    wx.hideLoading()
   })
 
 }
@@ -73,11 +82,10 @@ const callApi = (endpoint, schema, query = null) => {
 export const CALL_API = 'Call API'
 
 export default store => next => action => {
-    // //@todo 根据业务修改这里 拿到登录信息
     // const loginInfo = store.getState().get('loginInfo').toObject()
-    const {loginInfo} = store.getState()
+
     const callAPI = action[CALL_API]
-    const {popUpMsgWhenSuccess} = action
+    
     if (typeof callAPI === 'undefined') {
         return next(action)
     }
@@ -107,15 +115,13 @@ export default store => next => action => {
         delete finalAction[CALL_API]
         return finalAction
     }
-    if (loginInfo && loginInfo.sign && loginInfo.token) {
-        if (endpoint.indexOf('?') !== -1) {
-            endpoint += '&'
-        } else {
-            endpoint += '?'
-        }
-        endpoint += `sign=${loginInfo.sign}&access_token=${loginInfo.token}&account_id=${loginInfo.accountId}&user_id=${loginInfo.userId}`
-    }
-    
+    // if (loginInfo && loginInfo.sessionId) {
+    //     if (endpoint.indexOf('?') !== -1) {
+    //         endpoint += '&'
+    //     } else {
+    //         endpoint += '?'
+    //     }
+    // }
     const [requestType, successType, failureType] = types
   
     next(actionWith({type: requestType}))
@@ -123,24 +129,17 @@ export default store => next => action => {
     return callApi(endpoint, schema, query).then(
         response => {
             next(actionWith({
-                response,
+                response: {[schema] :response},
                 type: successType
             }))
-            
             return response
         }).catch(
-        error => {
-            const {code,message, status} = (error||{}).data||{}
-            if (status === 401) {
-                if (apiConfig.debug) {
-                    next(popLogin())
-                } else {
-                    window.location = '/'
-                }
-            }
-            //@todo
+          error => {
+            console.log(error)
+            const { errMsg, statusCode} = error||{}
+
             wx.showToast({
-                title: message || '服务异常',
+                title:  '服务异常',
                 icon: 'loading',
                 duration: 1000
             })
