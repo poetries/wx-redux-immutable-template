@@ -1,0 +1,6 @@
+{
+  "usingComponents": {
+    "wux-tabs": "../../components/wux/tabs/index",
+    "wux-tab": "../../components/wux/tab/index"
+  }
+}

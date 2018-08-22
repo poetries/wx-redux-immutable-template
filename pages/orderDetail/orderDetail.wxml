@@ -1,0 +1,51 @@
+<view>
+  <button style="font-size:16px;margin-bottom:11px;background:#fff" class="weui-btn" type="default">{{DATA.DATE_TODAY}} 报表</button>
+  <wux-tabs auto="{{ false }}" scroll current="{{ current }}" bindchange="onChange">
+        <wux-tab key="{{item.key}}" title="{{item.label}}" wx:for="{{REPORT_MAP}}" wx:key="{{item.key}}"></wux-tab>
+  </wux-tabs>
+  <view class="chart-container">
+      <canvas canvas-id="lineCanvas" disable-scroll="true" class="canvas" bindtouchstart="touchHandler"></canvas>
+  </view>
+  <scroll-view scroll-x="true" >
+    <view class="table">
+      <view class="tr bg-w">
+        <view class="th">时间</view>
+        <view class="th" wx:for="{{REPORT_MAP}}">{{item.label}}</view>
+      </view>
+      <block wx:for="{{orderHourlyReports.list}}" wx:key="{{item.hour}}">
+        <view class="tr bg-g" wx:if="{{index % 2 == 0}}">
+            <view class="td">{{item.hour}}</view> 
+            <view class="td">{{item.bidCount}}</view> 
+            <view class="td">{{item.bidRate}}</view> 
+            <view class="td">{{item.impressionCount}}</view> 
+            <view class="td">{{item.clickCount}}</view> 
+            <view class="td">{{item.clickRate}}</view> 
+            <view class="td">{{item.downloadCount}}</view> 
+            <view class="td">{{item.downloadRate}}</view> 
+            <view class="td">{{item.cost}}</view> 
+            <view class="td">{{item.costPerClick}}</view> 
+            <view class="td">{{item.costPerDownload}}</view> 
+        </view>
+        <view class="tr" wx:else>
+            <view class="td">{{item.hour}}</view> 
+            <view class="td">{{item.bidCount}}</view> 
+            <view class="td">{{item.bidRate}}</view> 
+            <view class="td">{{item.impressionCount}}</view> 
+            <view class="td">{{item.clickCount}}</view> 
+            <view class="td">{{item.clickRate}}</view> 
+            <view class="td">{{item.downloadCount}}</view> 
+            <view class="td">{{item.downloadRate}}</view> 
+            <view class="td">{{item.cost}}</view> 
+            <view class="td">{{item.costPerClick}}</view> 
+            <view class="td">{{item.costPerDownload}}</view>
+        </view>
+      </block>
+      <view class="tr" wx:if="{{orderHourlyReports.list.length==0}}">
+            <view class="td" style="color:#ccc;font-size:12px;">No Data</view> 
+        </view>
+    </view>
+</scroll-view>
+</view>
+
+
+

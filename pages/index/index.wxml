@@ -1,0 +1,36 @@
+<import  src='../../templates/orderList.wxml' />
+<import src="../../templates/search.wxml" />
+
+<wux-toptips id="wux-toptips" />
+
+<wux-floating-button 
+    id="wux-floating-button" 
+    visible="{{ visible }}"
+     position="{{ position }}" 
+     theme="{{ theme }}" 
+     buttons="{{ buttons }}" 
+     bind:change="bindchange" 
+ />
+
+ <wux-refresher id="wux-refresher" bind:pulling="onPulling" bind:refresh="onRefresh">
+<view>
+        <view class="weui-panel__bd">
+              <navigator url="/pages/searchbar/searchbar">
+                    <template is="search" ></template> 
+             </navigator>
+            <view class="weui-media-box weui-media-box_appmsg" hover-class="{{item.canseeReport?'weui-cell_active':''}}"   wx:for="{{wechatOrders.data}}" wx:key="{{item.orderId}}" data-item="{{item}}" wx:if="{{!wechatOrders.fetching}}" bindtap="bindSkipDetail">
+                 <template is="orderList" data="{{...item}}" ></template>
+             </view>
+        </view>
+        <view class="weui-loadmore"  wx:if="{{formInfo.isHideLoadMore}}">
+                <view class="weui-loading"></view>
+                <view class="weui-loadmore__tips">正在加载</view>
+        </view>
+        <view  wx:if="{{!wechatOrders.fetching && wechatOrders.length==0}}" style="margin-top:200px;color:#ccc">
+            <zan-loadmore type="text" text="暂无订单"></zan-loadmore>
+        </view>
+        
+         <zan-loadmore type="text" text="没有更多了" wx:if="{{!wechatOrders.fetching && formInfo.orderListTotalCount && formInfo.hasNoMoreData}}" style="color:#ccc"></zan-loadmore>
+</view>
+
+  </wux-refresher>

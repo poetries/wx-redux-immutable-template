@@ -1,0 +1,9 @@
+{
+    "usingComponents": {
+        "wux-floating-button": "/components/floating-button/index",
+        "zan-loadmore": "/components/zanui/loadmore/index",
+        "zan-panel": "/components/zanui/panel/index",
+        "wux-refresher": "/components/wux/refresher/index",
+        "wux-toptips": "/components/wux/toptips/index"
+    }
+}

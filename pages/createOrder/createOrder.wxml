@@ -1,0 +1,69 @@
+<!-- <view class="weui-toptips weui-toptips_warn" wx:if="{{topTips.show}}">{{topTips.content}}</view> -->
+
+<view style="padding-top:10px;">
+    <zan-cell-group>
+      <zan-field
+        title="{{ config.formInfo.webSite.title }}"
+        placeholder="{{ config.formInfo.webSite.placeholder }}"
+        focus="{{ config.formInfo.webSite.focus }}"
+        value="{{ formInfo.webSite }}"
+        error="{{ webSiteErr?config.formInfo.webSite.error:'' }}"
+        mode="{{ webSiteErr?config.formInfo.webSite.mode:'' }}"
+        bind:change="webSiteChange"
+        bind:blur="webSiteBlur"
+      >
+      </zan-field>
+
+      <zan-field
+        title="{{ config.formInfo.webName.title }}"
+        placeholder="{{ config.formInfo.webName.placeholder }}"
+        value="{{ formInfo.webName }}"
+        error="{{ webNameErr?config.formInfo.webName.error:'' }}"
+        mode="{{ webNameErr?config.formInfo.webName.mode:'' }}"
+        bind:change="webNameChange"
+        bind:blur="webNameBlur"
+      >
+      </zan-field>
+      <zan-field
+        title="{{ config.formInfo.dailyBudget.title }}"
+        value="{{ formInfo.dailyBudget }}"
+        right="{{ config.formInfo.dailyBudget.right }}"
+        type="{{ config.formInfo.dailyBudget.type }}"
+        error="{{ dailyBudgetErr?config.formInfo.dailyBudget.error:'' }}"
+        mode="{{ dailyBudgetErr?config.formInfo.dailyBudget.mode:'' }}"
+        input-type="{{ config.formInfo.dailyBudget.inputType }}"
+        placeholder="{{ config.formInfo.dailyBudget.placeholder }}"
+        bind:change="dailyBudgetChange"
+        bind:blur="dailyBudgetBlur"
+      >
+      </zan-field>
+       <zan-field
+        title="{{ config.formInfo.totalBudget.title }}"
+        value="{{ formInfo.totalBudget }}"
+        error="{{ totalBudgetErr?config.formInfo.totalBudget.error:'' }}"
+        mode="{{ totalBudgetErr?config.formInfo.totalBudget.mode:'' }}"
+        input-type="{{ config.formInfo.totalBudget.inputType }}"
+        right="{{ config.formInfo.totalBudget.right }}"
+        type="{{ config.formInfo.totalBudget.type }}"
+        placeholder="{{ config.formInfo.totalBudget.placeholder }}"
+        bind:change="totalBudgetChange"
+        bind:blur="totalBudgetBlur"
+      >
+      </zan-field>
+     <zan-field
+        title="{{ config.formInfo.description.title }}"
+        value="{{ formInfo.description }}"
+        type="{{ config.formInfo.description.type }}"
+        error="{{ descriptionErr?config.formInfo.description.error:'' }}"
+        mode="{{ descriptionErr?config.formInfo.description.mode:'' }}"
+        placeholder="{{ config.formInfo.description.placeholder }}"
+        maxlength="50"
+        bind:change="descriptionChange"
+        bind:blur="descriptionBlur"
+      >
+      </zan-field>
+    </zan-cell-group>
+    <view style="position:fixed;bottom:10px;left:10px;right:10px;">
+      <button class="weui-btn" type="primary" bindtap="bindSubmit" form-type="submit" >确认</button>
+    </view>
+</view>

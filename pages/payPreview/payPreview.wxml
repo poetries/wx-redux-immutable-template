@@ -1,0 +1,27 @@
+<view class="page__bd">
+    <view class="weui-form-preview">
+            <view class="weui-form-preview__hd">
+                <view class="weui-form-preview__item">
+                    <view class="weui-form-preview__label">付款金额</view>
+                    <view class="weui-form-preview__value_in-hd">¥{{orderInfo.price}}</view>
+                </view>
+            </view>
+            <view class="weui-form-preview__bd">
+                <view class="weui-form-preview__item">
+                    <view class="weui-form-preview__label">推广名称</view>
+                    <view class="weui-form-preview__value">{{orderInfo.webName}}</view>
+                </view>
+                <view class="weui-form-preview__item">
+                    <view class="weui-form-preview__label">推广地址</view>
+                    <view class="weui-form-preview__value">{{orderInfo.webUrl}}</view>
+                </view>
+                <view class="weui-form-preview__item">
+                    <view class="weui-form-preview__label">文案</view>
+                    <view class="weui-form-preview__value">{{orderInfo.description}}</view>
+                </view>
+            </view>
+            <view class="weui-form-preview__ft">
+                <view class="weui-form-preview__btn weui-form-preview__btn_primary" hover-class="weui-form-preview__btn_active" bindtap="comfimPay">确认</view>
+            </view>
+    </view>
+</view>

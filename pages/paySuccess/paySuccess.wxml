@@ -1,0 +1,8 @@
+<wux-result
+    title="支付成功"
+    label="￥{{price}}"
+    buttons="{{ buttons }}"
+    extra="© 2018 赢时通网络有限公司"
+    fixed
+    bind:click="onClick"
+/>

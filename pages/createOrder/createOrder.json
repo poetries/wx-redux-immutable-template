@@ -1,0 +1,7 @@
+{
+  "navigationBarTitleText":"创建订单",
+  "usingComponents": {
+    "zan-field": "/components/zanui/field/index",
+    "zan-cell-group": "/components/zanui/cell-group/index"
+  }
+}

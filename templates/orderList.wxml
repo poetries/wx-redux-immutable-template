@@ -1,0 +1,28 @@
+<template name="orderList"> 
+        <view class="weui-media-box__bd weui-media-box__bd_in-appmsg">
+                <view class="weui-media-box__title" style="font-size:14px;padding-bottom:12px">
+                    订单 {{orderId}}  
+                    <view style="color:#999;position:absolute;left:140px;top:17px;font-size:12px;">状态: <view style="color:{{color}};display:inline-block">{{orderStautsMsg}}</view></view>
+
+                    <view style="color:#999;position:absolute;left:250px;top:17px;font-size:12px;">额度:<text style="color:#d42e0c">￥{{price}}</text></view>
+                    <view style="position:absolute;right:10px;top:60px" wx:if="{{canSeeReport}}">
+                        <view class="weui-cell__ft weui-cell__ft_in-access"></view>
+                    </view>
+                </view>
+                <view class="weui-media-box__desc" style='padding-bottom:6px;'>
+                    创建时间：{{createdTime}}
+                </view>
+                    <!-- <view class="weui-media-box__desc" style='padding-bottom:6px;'>
+                    更新时间：{{updatedTime}}
+                </view> -->
+                    <view class="weui-media-box__desc" style='padding-bottom:6px;'>
+                    推广名称：{{webName}}
+                </view>
+                 <view class="weui-media-box__desc" style='padding-bottom:6px;'>
+                    推广地址：{{webUrl}}
+                </view>
+                <view class="weui-media-box__desc" style='padding-bottom:6px;'>
+                    文案：{{description}}
+                </view>
+        </view>
+</template>
