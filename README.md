@@ -8,6 +8,8 @@
 - [集成redux](./wx-redux-template)
 - [集成redux-immutable](./wx-redux-immutable-template)
 
+> 使用wx-redux-immutable-template 搭建的应用 https://github.com/poetries/wx-redux-immutable-template/tree/wx-flow
+
 ## 使用方法
 
 - 导入`wx-redux-template/wx-redux-immutable-template`到微信开发者工具
